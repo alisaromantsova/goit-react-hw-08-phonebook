@@ -17,6 +17,7 @@
 }
 .svg {
   fill: #3a92cd;
+  cursor: pointer;
 }
 .title {
   text-align: center;

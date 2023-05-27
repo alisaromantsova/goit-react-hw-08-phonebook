@@ -11,7 +11,6 @@ import { Register } from './Register/Register';
 import { refreshUser } from 'redux/auth/auth-operations';
 import { PrivateRoute } from './UserMenu/PrivateRoute';
 import { PublicRoute } from './UserMenu/PublicRoute';
-// import { selectUser } from 'redux/selectors';
 import { selectIsLoggedIn } from 'redux/selectors';
 import { useSelector } from 'react-redux';
 
@@ -19,19 +18,17 @@ const App = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const dispatch = useDispatch();
   useEffect(() => {
-    if (isLoggedIn) {
+    if (!isLoggedIn) {
       dispatch(refreshUser());
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch]);
-
+  }, []);
   useEffect(() => {
     if (isLoggedIn) {
       dispatch(fetchContacts());
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch]);
-
+  }, [isLoggedIn]);
   return (
     <>
       <Routes>

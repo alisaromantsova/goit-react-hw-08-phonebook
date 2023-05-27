@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-
+import Notiflix from 'notiflix';
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com/';
 
 const setAuthHeader = token => {
@@ -19,6 +19,7 @@ export const logInOperation = createAsyncThunk(
       setAuthHeader(response.data.token);
       return response.data;
     } catch (error) {
+      Notiflix.Notify.failure('Enter valid email/password!');
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -32,6 +33,7 @@ export const registerOperation = createAsyncThunk(
       setAuthHeader(response.data.token);
       return response.data;
     } catch (error) {
+      Notiflix.Notify.failure('Enter valid email/password!');
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -53,12 +55,14 @@ export const refreshUser = createAsyncThunk(
   'auth/refresh',
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
-    const persistToken = state.auth.token;
-    if (persistToken === null) {
-      return thunkAPI.rejectWithValue(`There isn't token`);
+    const persistedToken = state.auth.token;
+    if (persistedToken === null) {
+      return thunkAPI.rejectWithValue(
+        `Unable to refresh user. There's no token.`
+      );
     }
     try {
-      setAuthHeader(persistToken);
+      setAuthHeader(persistedToken);
       const response = await axios.get('/users/current');
       return response.data;
     } catch (error) {

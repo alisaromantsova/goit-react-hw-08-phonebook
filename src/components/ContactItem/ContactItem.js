@@ -9,7 +9,7 @@ export const ContactItem = ({ name, number, id }) => {
   const dispatch = useDispatch();
   const onDelete = contactId => {
     dispatch(deleteContacts(contactId));
-    console.log(contactId);
+
     Notiflix.Notify.info(`Contact was deleted`);
   };
 
