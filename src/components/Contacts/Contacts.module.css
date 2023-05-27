@@ -1,0 +1,46 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 30px 15px;
+  position: relative;
+}
+
+.filter {
+  display: block;
+  align-self: flex-end;
+  padding: 20px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: none;
+  background: none;
+}
+.svg {
+  fill: #3a92cd;
+}
+.title {
+  text-align: center;
+
+  margin-bottom: 20px;
+  color: #084873;
+}
+.header {
+  display: flex;
+  margin-bottom: 10px;
+  padding-left: 8px;
+}
+.point {
+  width: 110px;
+  /* text-align: center; */
+  color: #084873;
+}
+.notfound {
+  text-decoration: underline;
+  text-align: center;
+  padding: 20px;
+  color: #084873;
+  /* display: block; */
+}
+.notfound:hover {
+  color: #3a92cd;
+}
